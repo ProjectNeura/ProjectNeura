@@ -1,0 +1,122 @@
+@media (prefers-color-scheme: light) {
+    :root {
+        --main-color: #ffffff;
+        --text-color: #000000;
+        --input-color: #aeb0b3;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --main-color: #000000;
+        --text-color: #ffffff;
+        --input-color: #aeb0b3;
+    }
+}
+
+@media all and (orientation: portrait) {
+    div.bg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media all and (orientation: landscape) {
+    div.bg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@font-face {
+    font-family: Joystix;
+    src: url("../font/joystix_monospace.otf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+div, h1, h2, h3, h4, h5, p, a, b, span, label {
+    color: var(--text-color);
+    elevation: 10deg;
+}
+
+html, body {
+    font-family: "Joystix", serif;
+    margin: 0;
+    background: var(--main-color);
+}
+
+div.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+div.grid {
+    display: inline-flex;
+    align-items: flex-start;
+}
+
+div.g1 {
+    width: 8.33%;
+}
+
+div.g2 {
+    width: 16.67%;
+}
+
+div.g3 {
+    width: 25%;
+}
+
+div.g4 {
+    width: 33.33%;
+}
+
+div.g5 {
+    width: 41.67%;
+}
+
+div.g6 {
+    width: 50%;
+}
+
+div.g7 {
+    width: 58.33%;
+}
+
+div.g8 {
+    width: 66.67%;
+}
+
+div.g9 {
+    width: 75%;
+}
+
+div.g10 {
+    width: 83.33%;
+}
+
+div.g11 {
+    width: 91.67%;
+}
+
+a.clickable {
+    text-decoration: none;
+}
+
+b.error {
+    font-size: 3rem;
+    color: chocolate;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+}
