@@ -196,6 +196,15 @@
             border-radius: 6px;
             border: 1px solid #1f2d40;
         }
+
+        .warn {
+            background: rgba(255, 200, 0, .12);
+            border: 1px solid rgba(255, 200, 0, .45);
+            color: #ffe9a6;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
@@ -418,6 +427,62 @@
     const validateBtn = document.getElementById('validate-dockerfile');
     let pickedFiles = [];
 
+    function escapeHtml(s) {
+        return s.replace(/[&<>]/g, function (c) {
+            return {'&': '&amp;', '<': '&lt;', '>': '&gt;'}[c];
+        });
+    }
+
+    function lintDockerfile(text) {
+        var issues = [];
+
+        // Must have base image
+        if (!/^\s*FROM\s+\S+/im.test(text)) {
+            issues.push({sev: 'error', msg: 'Missing base image: add a FROM instruction (e.g., FROM ubuntu:22.04).'});
+        }
+
+        // Discourage sudo
+        if (/\bsudo\b/i.test(text)) {
+            issues.push({sev: 'warn', msg: 'Avoid using sudo inside containers; commands run as root by default.'});
+        }
+
+        // Scan each RUN instruction
+        var runRe = /^\s*RUN\s+(.+)$/gim;
+        var m;
+        while ((m = runRe.exec(text)) !== null) {
+            var chain = m[1];
+            var low = chain.toLowerCase();
+
+            // apt/apt-get install must have -y / --yes
+            var noYesRe = /\bapt(?:-get)?\s+install\b(?![^\n]*\s(?:-y|--yes))/i;
+            if (noYesRe.test(chain)) {
+                issues.push({sev: 'error', msg: 'Use -y or --yes with apt/apt-get install.', snippet: chain.trim()});
+            }
+
+            // Heuristics: update before install, and cleanup apt lists
+            if (/\bapt(?:-get)?\s+install\b/i.test(chain)) {
+                var idxInstall = Math.max(low.indexOf('apt-get install'), low.indexOf('apt install'));
+                var idxUpdate = Math.max(low.indexOf('apt-get update'), low.indexOf('apt update'));
+                if (idxInstall >= 0 && (idxUpdate === -1 || idxUpdate > idxInstall)) {
+                    issues.push({
+                        sev: 'warn',
+                        msg: 'Run apt-get update before apt-get install in the same RUN layer.',
+                        snippet: chain.trim()
+                    });
+                }
+                if (!/rm\s+-rf\s+\/var\/lib\/apt\/lists\//i.test(chain)) {
+                    issues.push({
+                        sev: 'warn',
+                        msg: 'Clean up apt lists after install to reduce image size (e.g., && rm -rf /var/lib/apt/lists/*).',
+                        snippet: chain.trim()
+                    });
+                }
+            }
+        }
+
+        return issues;
+    }
+
     dirPick.addEventListener('change', (e) => {
         pickedFiles = Array.from(e.target.files || []);
         dockervalid.textContent = pickedFiles.length ? `${pickedFiles.length} items selected.` : '';
@@ -430,9 +495,35 @@
             dockervalid.className = 'hint';
             return;
         }
-        const hasDf = pickedFiles.some(f => /(?:^|\/)Dockerfile$/.test(f.webkitRelativePath || f.name));
-        dockervalid.textContent = hasDf ? 'Dockerfile found ✓' : 'No Dockerfile in the selected folder ✗';
-        dockervalid.className = hasDf ? 'hint ok' : 'error';
+
+        const df = pickedFiles.find(f => /(?:^|\/)(Dockerfile)$/i.test(f.webkitRelativePath || f.name));
+        if (!df) {
+            dockervalid.textContent = 'No Dockerfile in the selected folder ✗';
+            dockervalid.className = 'error';
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            const text = String(reader.result || '');
+            const issues = lintDockerfile(text);
+
+            if (!issues.length) {
+                dockervalid.textContent = 'Dockerfile found ✓ No issues detected.';
+                dockervalid.className = 'hint ok';
+            } else {
+                var blocks = issues.map(function (i) {
+                    var cls = (i.sev === 'error' ? 'error' : 'warn');
+                    var snippet = i.snippet
+                        ? '<div class="hint"><code>' + escapeHtml(i.snippet.slice(0, 220)) + (i.snippet.length > 220 ? '…' : '') + '</code></div>'
+                        : '';
+                    return '<div class="' + cls + '">' + escapeHtml(i.msg) + snippet + '</div>';
+                }).join('');
+                dockervalid.innerHTML = '<div class="hint ok">Dockerfile found ✓</div>' + blocks;
+                dockervalid.className = '';
+            }
+        };
+        reader.readAsText(df);
     });
 </script>
 </body>
