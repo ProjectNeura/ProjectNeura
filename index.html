@@ -264,6 +264,7 @@
 
         .card {
             position: relative;
+            text-decoration: none;
             padding: 1.25rem;
             border-radius: 16px;
             background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
@@ -341,7 +342,6 @@
             opacity: 1;
             transform: none
         }
-
     </style>
 </head>
 <body>
@@ -404,22 +404,29 @@
             <span class="pill">Projects</span>
             <h2>What we’re building</h2>
             <div class="grid-3">
-                <article class="card" href="https://leads.projectneura.org">
-                    <div class="glow"></div>
-                    <h3>LEADS</h3>
-                    <p>Enable your racing car with powerful, data-driven instrumentation, control, and analysis systems,
-                        all wrapped up in a gorgeous look.</p>
-                </article>
-                <article class="card" href="https://mipcandy.projectneura.org">
-                    <div class="glow"></div>
-                    <h3>MIP Candy</h3>
-                    <p>Build a complete experiment pipeline for your PyTorch MIP model in 10 seconds.</p>
-                </article>
-                <article class="card" href="https://erbium.projectneura.org">
-                    <div class="glow"></div>
-                    <h3>Erbium</h3>
-                    <p>Project Neura's Internal Computing Platform</p>
-                </article>
+                <a style="text-decoration: none;" href="https://leads.projectneura.org">
+                    <article class="card">
+                        <div class="glow"></div>
+                        <h3>LEADS</h3>
+                        <p>Enable your racing car with powerful, data-driven instrumentation, control, and analysis
+                            systems,
+                            all wrapped up in a gorgeous look.</p>
+                    </article>
+                </a>
+                <a style="text-decoration: none;" href="https://erbium.projectneura.org">
+                    <article class="card">
+                        <div class="glow"></div>
+                        <h3>Erbium</h3>
+                        <p>Project Neura's Internal Computing Platform</p>
+                    </article>
+                </a>
+                <a style="text-decoration: none;" href="https://mipcandy.projectneura.org">
+                    <article class="card">
+                        <div class="glow"></div>
+                        <h3>MIP Candy</h3>
+                        <p>Build a complete experiment pipeline for your PyTorch MIP model in 10 seconds.</p>
+                    </article>
+                </a>
             </div>
         </div>
     </section>
