@@ -1,29 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Erbium | Project Neura</title>
-    <link rel="stylesheet" href="css/projectneura.css">
+    <meta charset="utf-8"/>
     <link rel="icon" type="image/x-icon" href="img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Erbium Command Builder</title>
+    <style>
+        :root {
+            --bg: #0b0f14;
+            --panel: #111821;
+            --muted: #aab7c4;
+            --text: #e8f0f7;
+            --accent: #6ee7ff;
+            --green: #36d399;
+            --red: #ff6b6b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+            background: linear-gradient(180deg, #0b0f14, #0a1016);
+            color: var(--text);
+        }
+
+        .wrap {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 32px 16px 56px;
+        }
+
+        h1 {
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            margin: 0 0 8px;
+        }
+
+        p.sub {
+            margin: 0 0 24px;
+            color: var(--muted);
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid #1e2732;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 14px;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        label {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px 14px;
+            background: #0c141c;
+            border: 1px solid #223042;
+            color: var(--text);
+            border-radius: 10px;
+            outline: none;
+        }
+
+        input[type="text"]:focus, select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(110, 231, 255, .15);
+        }
+
+        .hint {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            cursor: pointer;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid #263548;
+            background: #0e1722;
+            color: var(--text);
+            transition: .15s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            border-color: var(--accent);
+            box-shadow: 0 6px 14px rgba(110, 231, 255, .12);
+        }
+
+        .btn.primary {
+            background: linear-gradient(180deg, #0e2a3a, #0a2230);
+            border-color: #1a3b50;
+        }
+
+        .btn.success {
+            background: #0f2b22;
+            border-color: #1f6b52;
+        }
+
+        .btn.warn {
+            background: #2b1313;
+            border-color: #6b1f1f;
+        }
+
+        .out {
+            margin-top: 16px;
+            display: grid;
+            gap: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 110px;
+            padding: 12px 14px;
+            background: #050a0f;
+            color: var(--text);
+            border: 1px dashed #264258;
+            border-radius: 12px;
+            resize: vertical;
+        }
+
+        .errors {
+            margin-top: 8px;
+        }
+
+        .error {
+            background: rgba(255, 107, 107, .12);
+            border: 1px solid rgba(255, 107, 107, .4);
+            color: #ffd8d8;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .ok {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--accent);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .reveal {
+            display: none;
+        }
+
+        .row.hidden {
+            display: none;
+        }
+
+        .footer {
+            margin-top: 18px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        code {
+            background: #0b1420;
+            padding: 2px 6px;
+            border-radius: 6px;
+            border: 1px solid #1f2d40;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="grid" style="margin-right: 4rem;">
-        <div class="g6">
-            <img src="img/logo.png" alt="Project Neura" style="width: 400px; height: 400px;"/>
+<div class="wrap">
+    <h1>Erbium</h1>
+    <p class="sub">Project Neura's Internal Computing Platform</p>
+    <div class="card">
+        <div class="row">
+            <label for="action">Action</label>
+            <select id="action" aria-label="action">
+                <option value="run" selected>run</option>
+                <option value="pack">pack</option>
+            </select>
         </div>
-        <div class="g6" style="text-align: end; margin-top: 2rem;">
-            <h1>Project Neura</h1>
-            <p>Project Neura's Internal Computing Platform</p>
-            <p class="shortcuts">
-                <a href="mailto:central@projectneura.org">central@projectneura.org</a><br/>
-                <a href="https://github.com/ProjectNeura">GitHub</a> |
-                <a href="https://x.com/ProjectNeura">X</a> |
-                <a href="https://www.instagram.com/projectneura">Insta</a> |
-                <a href="https://discord.gg/CcfTHeWhdc">Discord</a>
-            </p>
+
+        <div class="row">
+            <label for="version">Version <span class="hint">defaults to <code>latest</code></span></label>
+            <input id="version" type="text" placeholder="latest"/>
+        </div>
+
+        <!-- RUN-ONLY FIELDS -->
+        <div class="row run-only" id="row-input">
+            <label for="input">Input directory</label>
+            <input id="input" type="text" placeholder="/abs/path/to/input"/>
+        </div>
+        <div class="row run-only" id="row-output">
+            <label for="output">Output directory</label>
+            <input id="output" type="text" placeholder="/abs/path/to/output"/>
+        </div>
+        <div class="row run-only">
+            <label for="gpus">GPUs</label>
+            <input id="gpus" type="text" placeholder="all | 0 | 0,1 | device=0" value="all"/>
+        </div>
+        <div class="row run-only">
+            <label for="temporary">Temporary</label>
+            <div class="toggle">
+                <input id="temporary" type="checkbox"/>
+                <span class="hint">Add <code>--temporary</code> (auto‑remove after execution)</span>
+            </div>
+        </div>
+
+        <!-- PACK-ONLY FIELDS -->
+        <div class="row pack-only hidden" id="row-target">
+            <label for="target">Target directory</label>
+            <input id="target" type="text" placeholder="./docker"/>
+        </div>
+        <div class="row pack-only hidden">
+            <label>Optional Dockerfile check</label>
+            <div>
+                <div class="grid-2">
+                    <label class="btn" for="dirpick">Pick target folder to validate</label>
+                    <input id="dirpick" class="reveal" type="file" webkitdirectory directory/>
+                    <button id="validate-dockerfile" class="btn">Validate Dockerfile</button>
+                </div>
+                <div class="hint">If you pick a folder, we ensure a <code>Dockerfile</code> exists inside it.</div>
+                <div id="dockervalid" class="hint"></div>
+            </div>
+        </div>
+
+        <div class="out">
+            <div class="grid-2">
+                <button id="build" class="btn primary">Build Command</button>
+                <button id="copy" class="btn success" disabled>Copy to Clipboard</button>
+            </div>
+            <textarea id="command" readonly placeholder="Your erbium command will appear here…"></textarea>
+            <div class="errors" id="errors"></div>
+        </div>
+
+        <div class="footer">GitHub: <a href="https://github.com/ProjectNeura/Erbium" target="_blank" rel="noreferrer">ProjectNeura/Erbium</a>
         </div>
     </div>
 </div>
+
+<script>
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => document.querySelectorAll(s);
+
+    const actionEl = $('#action');
+    const versionEl = $('#version');
+    const inputEl = $('#input');
+    const outputEl = $('#output');
+    const gpusEl = $('#gpus');
+    const temporaryEl = $('#temporary');
+    const targetEl = $('#target');
+    const errorsEl = $('#errors');
+    const cmdEl = $('#command');
+    const copyBtn = $('#copy');
+    const buildBtn = $('#build');
+
+    const runOnly = $$('.run-only');
+    const packOnly = $$('.pack-only');
+
+    function setMode() {
+        const mode = actionEl.value;
+        runOnly.forEach(n => n.classList.toggle('hidden', mode !== 'run'));
+        packOnly.forEach(n => n.classList.toggle('hidden', mode !== 'pack'));
+        cmdEl.value = '';
+        copyBtn.disabled = true;
+        errorsEl.innerHTML = '';
+    }
+
+    actionEl.addEventListener('change', setMode);
+    setMode();
+
+    function validate() {
+        const errs = [];
+        const action = actionEl.value;
+
+        // action legality
+        if (!["pack", "run"].includes(action)) {
+            errs.push('Action must be either "pack" or "run".');
+        }
+
+        // version legality: letters, digits, dots, dashes, underscores; allow empty -> default latest
+        const version = (versionEl.value || 'latest').trim();
+        if (!/^[A-Za-z0-9._-]+$/.test(version)) {
+            errs.push('Version may only contain letters, digits, ".", "-", and "_".');
+        }
+
+        if (action === 'run') {
+            const input = (inputEl.value || '').trim();
+            const output = (outputEl.value || '').trim();
+            const gpus = (gpusEl.value || 'all').trim();
+
+            if (!input) errs.push('Input directory (-i/--input) is required.');
+            if (!output) errs.push('Output directory (-o/--output) is required.');
+            if (input && output && input === output) errs.push('Input and output directories must be different.');
+
+            // GPUs legality: allow 'all' OR comma-separated integers OR device=INT
+            if (!(gpus === 'all' || /^\d+(,\d+)*$/.test(gpus) || /^device=\d+$/.test(gpus))) {
+                errs.push('GPUs (--gpus) must be "all", a comma-separated list of integers (e.g., 0,1), or "device=N".');
+            }
+        }
+
+        if (action === 'pack') {
+            const target = (targetEl.value || '').trim() || 'docker';
+            // basic path sanity (no spaces-only, no null bytes)
+            if (/\0/.test(target)) errs.push('Target path contains illegal null byte.');
+            // Optional hint if it looks empty
+            if (!target) errs.push('Target directory (-t/--target) is required or defaults to "docker".');
+
+            // If user used the optional picker, ensure a Dockerfile exists
+            if (pickedFiles.length) {
+                const ok = pickedFiles.some(f => {
+                    // webkitRelativePath like: "folder/sub/Dockerfile"
+                    return /(?:^|\/)Dockerfile$/.test(f.webkitRelativePath || f.name);
+                });
+                if (!ok) errs.push('Selected folder does not contain a Dockerfile.');
+            }
+        }
+
+        return errs;
+    }
+
+    function buildCommand() {
+        const errs = validate();
+        errorsEl.innerHTML = '';
+        if (errs.length) {
+            errorsEl.innerHTML = errs.map(e => `<div class="error">${e}</div>`).join('');
+            cmdEl.value = '';
+            copyBtn.disabled = true;
+            return;
+        }
+
+        const action = actionEl.value;
+        const version = (versionEl.value || 'latest').trim();
+
+        const parts = ['erbium', action];
+        if (version && version !== 'latest') {
+            parts.push('-v', version);
+        } else {
+            parts.push('-v', 'latest');
+        }
+
+        if (action === 'run') {
+            const input = inputEl.value.trim();
+            const output = outputEl.value.trim();
+            const gpus = (gpusEl.value || 'all').trim();
+            parts.push('-i', quote(input));
+            parts.push('-o', quote(output));
+            parts.push('--gpus', gpus);
+            if (temporaryEl.checked) parts.push('--temporary');
+        } else {
+            const target = (targetEl.value || '').trim() || 'docker';
+            parts.push('-t', quote(target));
+        }
+
+        const cmd = parts.join(' ');
+        cmdEl.value = cmd;
+        copyBtn.disabled = false;
+    }
+
+    function quote(p) {
+        // Quote spaces and special characters for POSIX shells
+        if (/[^A-Za-z0-9._\/-]/.test(p)) {
+            return `'${p.replace(/'/g, "'\\''")}'`;
+        }
+        return p;
+    }
+
+    buildBtn.addEventListener('click', buildCommand);
+
+    copyBtn.addEventListener('click', async () => {
+        const v = cmdEl.value;
+        if (!v) return;
+        try {
+            await navigator.clipboard.writeText(v);
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => (copyBtn.textContent = 'Copy to Clipboard'), 1200);
+        } catch (_) {
+            // Fallback
+            cmdEl.select();
+            document.execCommand('copy');
+        }
+    });
+
+    // Optional Dockerfile validation via directory picker
+    const dirPick = document.getElementById('dirpick');
+    const dockervalid = document.getElementById('dockervalid');
+    const validateBtn = document.getElementById('validate-dockerfile');
+    let pickedFiles = [];
+
+    dirPick.addEventListener('change', (e) => {
+        pickedFiles = Array.from(e.target.files || []);
+        dockervalid.textContent = pickedFiles.length ? `${pickedFiles.length} items selected.` : '';
+        dockervalid.className = 'hint';
+    });
+
+    validateBtn.addEventListener('click', () => {
+        if (!pickedFiles.length) {
+            dockervalid.textContent = 'Pick a folder first (optional).';
+            dockervalid.className = 'hint';
+            return;
+        }
+        const hasDf = pickedFiles.some(f => /(?:^|\/)Dockerfile$/.test(f.webkitRelativePath || f.name));
+        dockervalid.textContent = hasDf ? 'Dockerfile found ✓' : 'No Dockerfile in the selected folder ✗';
+        dockervalid.className = hasDf ? 'hint ok' : 'error';
+    });
+</script>
 </body>
 </html>
