@@ -456,6 +456,25 @@
                         <pre><code id="scp-example">scp -o ProxyCommand="cloudflared access ssh --hostname %h" path/to/localfile root@main-erbium.projectneura.org:path/to/remotefile</code></pre>
                     </article>
                 </div>
+
+                <div class="section-grid reveal delay-2">
+                    <article class="section">
+                        <h2>JupyterLab Access</h2>
+                        <p>
+                            Users can also access JupyterLab in the browser at
+                            <a href="https://jupyter-main-erbium.projectneura.org">https://jupyter-main-erbium.projectneura.org</a>.
+                            This provides a web-based interface for notebooks, terminals, and file browsing on the main Erbium node.
+                        </p>
+                    </article>
+
+                    <article class="section">
+                        <h2>When To Use It</h2>
+                        <p>
+                            Use JupyterLab when you want an interactive development environment without opening a direct SSH session first. It complements the SSH and SCP workflows shown above.
+                        </p>
+                    </article>
+                </div>
+
             </section>
 
             <div class="footer">
