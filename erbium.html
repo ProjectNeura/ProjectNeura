@@ -442,7 +442,7 @@
                             </div>
                             <button type="button" data-copy-target="ssh-example">Copy</button>
                         </header>
-                        <pre><code id="ssh-example">ssh -o ProxyCommand="cloudflared access ssh --hostname %h" root@main-erbium.projectneura.org</code></pre>
+                        <pre><code id="ssh-example">ssh -o ProxyCommand="cloudflared access ssh --hostname %h" access@main-erbium.projectneura.org</code></pre>
                     </article>
 
                     <article class="command-card">
@@ -453,7 +453,7 @@
                             </div>
                             <button type="button" data-copy-target="scp-example">Copy</button>
                         </header>
-                        <pre><code id="scp-example">scp -o ProxyCommand="cloudflared access ssh --hostname %h" path/to/localfile root@main-erbium.projectneura.org:path/to/remotefile</code></pre>
+                        <pre><code id="scp-example">scp -o ProxyCommand="cloudflared access ssh --hostname %h" path/to/localfile access@main-erbium.projectneura.org:path/to/remotefile</code></pre>
                     </article>
                 </div>
 
