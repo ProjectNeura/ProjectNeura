@@ -1,7 +1,3 @@
-// Add new projects to this array. Fields used by the homepage:
-// name, code, category, color, summary, tags, url.
-// Supported current categories: research, systems, tools, applied.
-// If url is omitted, the card still appears and shows a category label instead of a link.
 window.neuraProjects = [
     {
         name: "SegWithU",
@@ -16,7 +12,7 @@ window.neuraProjects = [
         name: "LEADS",
         code: "Applied system",
         category: "applied",
-        color: "#d54b3d",
+        color: "#EB088C",
         url: "https://leads.projectneura.org",
         summary: "Telemetry, control, and analysis for high-performance systems, built on shared engineering patterns and reusable operational infrastructure.",
         tags: ["vehicle intelligence", "interfaces", "analysis"]

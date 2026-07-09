@@ -16,7 +16,7 @@
             --surface-alt: #ebe8df;
             --line: #d8d3c8;
             --line-strong: #bcb5a7;
-            --red: #d54b3d;
+            --red: #EB088C;
             --blue: #1f5f9f;
             --green: #357761;
             --gold: #b7772a;
@@ -353,7 +353,7 @@
             min-height: 16rem;
             background:
                 linear-gradient(90deg, rgba(17, 19, 23, 0.72), rgba(17, 19, 23, 0.18)),
-                var(--feature-color, #d54b3d);
+                var(--feature-color, #EB088C);
             position: relative;
         }
 
@@ -862,7 +862,7 @@
                     <div class="kicker">Research collective / project gallery / field notes</div>
                     <h1>Shared foundations for ambitious technical work.</h1>
                     <p class="hero-lede">
-                        Project Neura brings research, engineering, and reusable infrastructure into one public-facing gallery: active projects, build notes, experiment reports, and the systems behind them.
+                        Project Neura brings research, engineering, and reusable infrastructure into one place: active projects, build notes, experiment reports, and the systems behind them.
                     </p>
                     <div class="hero-actions">
                         <a class="button" href="https://join.projectneura.org" target="_blank" rel="noopener">Join</a>
@@ -935,7 +935,7 @@
                         <h2>Research projects and reusable systems.</h2>
                     </div>
                     <p>
-                        Browse the main project areas. The layout is intentionally editorial and expandable, so new projects can sit beside notes, releases, and research reports.
+                        Explore research and infrastructure efforts spanning segmentation uncertainty, compute orchestration, applied systems, and reusable experiment tooling.
                     </p>
                 </div>
 
@@ -1101,7 +1101,7 @@
                 return;
             }
 
-            featuredPost.style.setProperty("--feature-color", feature.color || "#d54b3d");
+            featuredPost.style.setProperty("--feature-color", feature.color || "#EB088C");
             featuredPost.innerHTML = `
                 <div class="feature-art" data-label="${feature.project || feature.category}"></div>
                 <div class="feature-copy">

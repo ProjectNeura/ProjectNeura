@@ -1,6 +1,3 @@
-// Add new posts to this array. Fields used by the homepage:
-// slug, title, date, category, project, summary, tags, color, featured, body, url.
-// Use body for in-page posts, or url for an external article/project page.
 window.neuraPosts = [
     {
         slug: "shared-infrastructure-as-research-output",
@@ -10,7 +7,7 @@ window.neuraPosts = [
         project: "Project Neura",
         summary: "Why the systems around experiments, handoffs, and reproducibility should be treated as durable research work rather than background setup.",
         tags: ["infrastructure", "community", "reproducibility"],
-        color: "#d54b3d",
+        color: "#EB088C",
         featured: true,
         body: [
             "Project Neura is built around a simple premise: the tooling around research is part of the research. If an experiment can only be repeated by the person who happened to set it up, the work is weaker than it needs to be.",
