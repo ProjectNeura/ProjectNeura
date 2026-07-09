@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 2000 2000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g id="bg" transform="matrix(1.381216,0,0,1.243781,-151.933602,-108.354786)">
-        <path d="M1159.8,87.117C1379.72,87.117 1558,285.097 1558,529.317L1558,1252.917C1558,1497.138 1379.72,1695.117 1159.8,1695.117L508.2,1695.117C288.28,1695.117 110,1497.138 110,1252.917L110,529.317C110,285.097 288.28,87.117 508.2,87.117L1159.8,87.117Z" style="fill:rgb(8,6,5);"/>
-    </g>
+<svg width="100%" height="100%" viewBox="0 0 2000 2000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <rect x="-0" y="0" width="2000" height="2000" style="stroke:black;stroke-opacity:0;stroke-width:20.42px;"/>
     <g id="n" transform="matrix(1,0,0,1,25.791354,9.259259)">
         <path d="M1352.699,531.85L1401.235,418.519L1672.628,418.519C1696.212,418.519 1718.218,430.366 1731.203,450.053C1744.188,469.74 1746.415,494.633 1737.131,516.312L1320.049,1490.205C1311.029,1511.266 1276.433,1556.892 1221.419,1562.963L911.111,1562.963L684.57,1095.656L719.813,1012.811L953.622,1495.111L1180.591,1495.111L1209.739,1495.111C1230.605,1495.111 1249.462,1482.673 1257.676,1463.493L1676.142,486.37L1445.988,486.37L1385.294,628.094C1383.915,610.717 1378.5,594.293 1374.249,580.167C1368.494,561.045 1360.956,546.134 1352.699,531.85ZM1233.465,982.616L1092.13,1312.634L973.594,1068.118L1048.998,1068.118L1088.308,1149.206L1129.254,1053.596C1153.547,1044.726 1187.706,1026.933 1213.684,1002.759C1220.742,996.191 1227.317,989.533 1233.465,982.616Z" style="fill:white;"/>
     </g>
