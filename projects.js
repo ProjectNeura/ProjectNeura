@@ -4,7 +4,7 @@ window.neuraProjects = [
         code: "Research project",
         category: "research",
         color: "#5b6f9f",
-        url: "https://github.com/ProjectNeura/SegWithU",
+        url: "https://segwithu.projectneura.org",
         summary: "A segmentation uncertainty research project for estimating, analyzing, and working with model uncertainty in visual prediction workflows.",
         tags: ["uncertainty", "segmentation", "vision"]
     },
