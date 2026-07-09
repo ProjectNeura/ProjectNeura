@@ -209,90 +209,139 @@
             border: 1px solid var(--ink);
             border-radius: var(--radius);
             background: var(--surface);
-        }
-
-        .board-media {
-            min-height: 17rem;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            border-bottom: 1px solid var(--ink);
             overflow: hidden;
         }
 
-        .board-mark {
-            display: grid;
-            place-items: center;
-            background:
-                linear-gradient(135deg, rgba(213, 75, 61, 0.18), transparent 38%),
-                linear-gradient(315deg, rgba(31, 95, 159, 0.2), transparent 42%),
-                var(--surface-alt);
-            border-right: 1px solid var(--ink);
-            padding: 2rem;
+        .project-carousel {
+            position: relative;
         }
 
-        .board-mark img {
-            width: min(10rem, 55%);
+        .project-track {
+            display: flex;
+            transition: transform 0.55s ease;
+        }
+
+        .project-slide {
+            min-width: 100%;
+            display: grid;
+        }
+
+        .slide-main {
+            min-height: 24rem;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(240px, 0.78fr);
+            border-bottom: 1px solid var(--ink);
+        }
+
+        .slide-art {
+            position: relative;
+            display: grid;
+            place-items: center;
+            padding: 2rem;
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, color-mix(in srgb, var(--slide-color, var(--red)) 18%, transparent), transparent 38%),
+                linear-gradient(315deg, rgba(31, 95, 159, 0.16), transparent 42%),
+                var(--surface-alt);
+            border-right: 1px solid var(--ink);
+        }
+
+        .slide-art::before {
+            content: attr(data-code);
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            color: rgba(17, 19, 23, 0.42);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .slide-mark {
+            width: min(11rem, 62%);
+            aspect-ratio: 1;
+            display: grid;
+            place-items: center;
             border-radius: var(--radius);
+            background: #050507;
             box-shadow: 0 18px 45px rgba(17, 19, 23, 0.18);
         }
 
-        .board-list {
-            display: grid;
+        .slide-mark img {
+            width: 72%;
         }
 
-        .board-list a {
-            min-height: 5rem;
+        .slide-copy {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: space-between;
-            gap: 1rem;
-            padding: 1rem;
-            border-bottom: 1px solid var(--line);
+            gap: 1.2rem;
+            padding: 1.35rem;
+        }
+
+        .slide-copy h3 {
+            margin: 0.45rem 0 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(2rem, 4.5vw, 4rem);
+            font-weight: 500;
+            letter-spacing: -0.04em;
+            line-height: 0.96;
+        }
+
+        .slide-copy p {
+            margin: 1rem 0 0;
             color: var(--ink-soft);
         }
 
-        .board-list a:last-child {
-            border-bottom: 0;
+        .slide-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-top: 1rem;
         }
 
-        .board-list strong {
-            color: var(--ink);
-        }
-
-        .board-list span {
+        .slide-tags span {
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            padding: 0.24rem 0.55rem;
             color: var(--muted);
+            font-size: 0.78rem;
         }
 
-        .board-list a::after {
-            content: "->";
+        .slide-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            width: fit-content;
             color: var(--red);
             font-weight: 800;
         }
 
-        .board-caption {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+        .slide-link::after {
+            content: "->";
         }
 
-        .board-caption div {
+        .project-dots {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
             padding: 1rem;
-            border-right: 1px solid var(--line);
+            border-top: 1px solid var(--line);
         }
 
-        .board-caption div:last-child {
-            border-right: 0;
+        .project-dot {
+            width: 2.4rem;
+            height: 0.42rem;
+            border: 0;
+            border-radius: 999px;
+            background: var(--line-strong);
+            cursor: pointer;
+            padding: 0;
         }
 
-        .board-caption strong {
-            display: block;
-            margin-bottom: 0.2rem;
-            font-size: 1.45rem;
-            letter-spacing: -0.03em;
-        }
-
-        .board-caption span {
-            color: var(--muted);
-            font-size: 0.9rem;
+        .project-dot[aria-current="true"] {
+            background: var(--red);
         }
 
         section {
@@ -800,22 +849,17 @@
                 font-size: clamp(3rem, 18vw, 5.3rem);
             }
 
-            .board-media,
-            .board-caption {
+            .slide-main {
                 grid-template-columns: 1fr;
             }
 
-            .board-mark,
-            .board-caption div {
+            .slide-art {
                 border-right: 0;
+                min-height: 16rem;
             }
 
-            .board-caption div {
-                border-bottom: 1px solid var(--line);
-            }
-
-            .board-caption div:last-child {
-                border-bottom: 0;
+            .project-dot {
+                flex: 1;
             }
 
             section {
@@ -871,41 +915,7 @@
                     </div>
                 </div>
 
-                <aside class="hero-board reveal" aria-label="Project Neura current work board">
-                    <div class="board-media">
-                        <div class="board-mark">
-                            <img src="img/logo_square.svg" alt="Project Neura logo" />
-                        </div>
-                        <div class="board-list">
-                            <a href="https://leads.projectneura.org" target="_blank" rel="noopener">
-                                <strong>LEADS</strong>
-                                <span>Vehicle intelligence</span>
-                            </a>
-                            <a href="https://erbium.projectneura.org" target="_blank" rel="noopener">
-                                <strong>Erbium</strong>
-                                <span>Compute layer</span>
-                            </a>
-                            <a href="https://mipcandy.projectneura.org" target="_blank" rel="noopener">
-                                <strong>MIP Candy</strong>
-                                <span>Research setup</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="board-caption">
-                        <div>
-                            <strong>03</strong>
-                            <span>public project surfaces</span>
-                        </div>
-                        <div>
-                            <strong>01</strong>
-                            <span>shared infrastructure stack</span>
-                        </div>
-                        <div>
-                            <strong>Open</strong>
-                            <span>contributors and collaborators</span>
-                        </div>
-                    </div>
-                </aside>
+                <aside class="hero-board reveal" id="projectShowcase" aria-label="Featured Project Neura projects"></aside>
             </div>
         </section>
 
@@ -1048,6 +1058,7 @@
     <script src="blog-posts.js"></script>
     <script>
         const projectGrid = document.getElementById("projectGrid");
+        const projectShowcase = document.getElementById("projectShowcase");
         const projectFilterButtons = document.querySelectorAll("[data-project-filter]");
         const projects = Array.isArray(window.neuraProjects) ? window.neuraProjects : [];
         const posts = Array.isArray(window.neuraPosts) ? window.neuraPosts : [];
@@ -1064,6 +1075,78 @@
         const formatDate = (value) => {
             const date = new Date(`${value}T12:00:00`);
             return Number.isNaN(date.getTime()) ? value : formatter.format(date);
+        };
+
+        const renderProjectShowcase = () => {
+            if (!projectShowcase || projects.length === 0) {
+                return;
+            }
+
+            let currentSlide = 0;
+            let slideshowTimer;
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            projectShowcase.innerHTML = `
+                <div class="project-carousel">
+                    <div class="project-track">
+                        ${projects.map((project) => `
+                            <article class="project-slide" style="--slide-color: ${project.color || "#EB088C"}">
+                                <div class="slide-main">
+                                    <div class="slide-art" data-code="${project.code || project.category}">
+                                        <div class="slide-mark">
+                                            <img src="img/logo_square.svg" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="slide-copy">
+                                        <div>
+                                            <div class="card-kicker">${project.category}</div>
+                                            <h3>${project.name}</h3>
+                                            <p>${project.summary}</p>
+                                            <div class="slide-tags">${renderMeta((project.tags || []).slice(0, 3))}</div>
+                                        </div>
+                                        ${project.url ? `<a class="slide-link" href="${project.url}" target="_blank" rel="noopener">View project</a>` : `<span class="slide-link">${project.category}</span>`}
+                                    </div>
+                                </div>
+                            </article>
+                        `).join("")}
+                    </div>
+                    <div class="project-dots" aria-label="Project slideshow controls">
+                        ${projects.map((project, index) => `
+                            <button class="project-dot" type="button" data-slide-index="${index}" aria-label="Show ${project.name}" aria-current="${index === 0 ? "true" : "false"}"></button>
+                        `).join("")}
+                    </div>
+                </div>
+            `;
+
+            const track = projectShowcase.querySelector(".project-track");
+            const dots = projectShowcase.querySelectorAll("[data-slide-index]");
+            const showSlide = (index) => {
+                currentSlide = (index + projects.length) % projects.length;
+                track.style.transform = `translateX(-${currentSlide * 100}%)`;
+                dots.forEach((dot, dotIndex) => {
+                    dot.setAttribute("aria-current", dotIndex === currentSlide ? "true" : "false");
+                });
+            };
+            const start = () => {
+                if (prefersReducedMotion || projects.length < 2) {
+                    return;
+                }
+                window.clearInterval(slideshowTimer);
+                slideshowTimer = window.setInterval(() => showSlide(currentSlide + 1), 4200);
+            };
+            const stop = () => window.clearInterval(slideshowTimer);
+
+            dots.forEach((dot) => {
+                dot.addEventListener("click", () => {
+                    showSlide(Number(dot.dataset.slideIndex || 0));
+                    start();
+                });
+            });
+            projectShowcase.addEventListener("mouseenter", stop);
+            projectShowcase.addEventListener("mouseleave", start);
+            projectShowcase.addEventListener("focusin", stop);
+            projectShowcase.addEventListener("focusout", start);
+            start();
         };
 
         const renderProjects = (filter = "all") => {
@@ -1160,6 +1243,7 @@
             document.body.style.overflow = "";
         };
 
+        renderProjectShowcase();
         renderProjects();
         renderPostFilters();
         renderFeature();
