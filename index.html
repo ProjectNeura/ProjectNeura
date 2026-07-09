@@ -345,6 +345,10 @@
             overflow: hidden;
         }
 
+        .feature-card:only-child {
+            grid-column: 1 / -1;
+        }
+
         .feature-art {
             min-height: 16rem;
             background:
@@ -913,24 +917,12 @@
                         <h2>Recent work from the Neura stack.</h2>
                     </div>
                     <p>
-                        A front-page editorial stream for project milestones, technical notes, and research updates. The featured story below is populated from the blog data file.
+                        Notes from active work across infrastructure, research, and applied systems.
                     </p>
                 </div>
 
                 <div class="feature-grid">
                     <article class="feature-card reveal" id="featuredPost"></article>
-                    <div class="mini-stack">
-                        <article class="note-panel reveal">
-                            <div class="card-kicker">How to add posts</div>
-                            <h3>Append one object to the data files.</h3>
-                            <p>Posts live in <code>blog-posts.js</code>; projects live in <code>projects.js</code>. The homepage renders both automatically.</p>
-                        </article>
-                        <article class="note-panel reveal">
-                            <div class="card-kicker">Editorial model</div>
-                            <h3>Projects and writing stay connected.</h3>
-                            <p>Each post can point at a project, category, tags, external link, or an in-page article body.</p>
-                        </article>
-                    </div>
                 </div>
             </div>
         </section>
@@ -967,7 +959,7 @@
                         <h2>Posts, releases, and field notes.</h2>
                     </div>
                     <p>
-                        A lightweight blog system for a static site. Add posts in the data file now; later, the same shape can be fed by markdown, a CMS, or generated JSON.
+                        Research notes, release updates, and field reports from the projects moving through Project Neura.
                     </p>
                 </div>
 

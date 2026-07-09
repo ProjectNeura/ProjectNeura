@@ -30,7 +30,7 @@ window.neuraPosts = [
         body: [
             "Erbium is the infrastructure-facing side of Project Neura: the place where repeatable execution patterns and operational conventions become reusable.",
             "A shared compute layer matters because it lets project teams carry lessons forward. When setup, logging, and environment conventions are consistent, experiments become easier to inspect and easier to improve.",
-            "Future posts can use this same format for release notes, design notes, or implementation reports."
+            "The work gives Neura projects a common backbone for logs, environments, and execution paths, making research work easier to revisit and extend."
         ]
     },
     {
@@ -45,7 +45,7 @@ window.neuraPosts = [
         body: [
             "SegWithU belongs in the research gallery as a project focused on uncertainty in segmentation. The core question is not only what a model predicts, but how confidently and reliably that prediction should be interpreted.",
             "Uncertainty work benefits from the same Neura structure as infrastructure projects: clear experiment records, repeatable evaluation, and notes that preserve the choices behind each iteration.",
-            "As SegWithU develops, this notebook can hold dataset notes, uncertainty methods, model comparisons, and short reports from each research milestone."
+            "The project connects dataset notes, uncertainty methods, model comparisons, and milestone reports into a research trail that can be inspected over time."
         ]
     },
     {
