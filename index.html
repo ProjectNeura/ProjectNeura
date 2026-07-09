@@ -228,56 +228,20 @@
 
         .slide-main {
             min-height: 24rem;
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(240px, 0.78fr);
+            display: flex;
             border-bottom: 1px solid var(--ink);
-        }
-
-        .slide-art {
-            position: relative;
-            display: grid;
-            place-items: center;
-            padding: 2rem;
-            overflow: hidden;
             background:
-                linear-gradient(135deg, color-mix(in srgb, var(--slide-color, var(--red)) 18%, transparent), transparent 38%),
-                linear-gradient(315deg, rgba(31, 95, 159, 0.16), transparent 42%),
-                var(--surface-alt);
-            border-right: 1px solid var(--ink);
-        }
-
-        .slide-art::before {
-            content: attr(data-code);
-            position: absolute;
-            left: 1rem;
-            top: 1rem;
-            color: rgba(17, 19, 23, 0.42);
-            font-size: 0.72rem;
-            font-weight: 800;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-        }
-
-        .slide-mark {
-            width: min(11rem, 62%);
-            aspect-ratio: 1;
-            display: grid;
-            place-items: center;
-            border-radius: var(--radius);
-            background: #050507;
-            box-shadow: 0 18px 45px rgba(17, 19, 23, 0.18);
-        }
-
-        .slide-mark img {
-            width: 72%;
+                linear-gradient(135deg, color-mix(in srgb, var(--slide-color, var(--red)) 8%, transparent), transparent 42%),
+                var(--surface);
         }
 
         .slide-copy {
             display: flex;
+            width: 100%;
             flex-direction: column;
             justify-content: space-between;
             gap: 1.2rem;
-            padding: 1.35rem;
+            padding: 1.5rem;
         }
 
         .slide-copy h3 {
@@ -849,15 +813,6 @@
                 font-size: clamp(3rem, 18vw, 5.3rem);
             }
 
-            .slide-main {
-                grid-template-columns: 1fr;
-            }
-
-            .slide-art {
-                border-right: 0;
-                min-height: 16rem;
-            }
-
             .project-dot {
                 flex: 1;
             }
@@ -1092,11 +1047,6 @@
                         ${projects.map((project) => `
                             <article class="project-slide" style="--slide-color: ${project.color || "#EB088C"}">
                                 <div class="slide-main">
-                                    <div class="slide-art" data-code="${project.code || project.category}">
-                                        <div class="slide-mark">
-                                            <img src="img/logo_square.svg" alt="" />
-                                        </div>
-                                    </div>
                                     <div class="slide-copy">
                                         <div>
                                             <div class="card-kicker">${project.category}</div>
