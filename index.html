@@ -70,9 +70,104 @@
             font: inherit;
         }
 
+        body.intro-lock {
+            overflow: hidden;
+        }
+
         .container {
             width: min(calc(100% - 2rem), var(--container));
             margin: 0 auto;
+        }
+
+        .intro-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: grid;
+            place-items: center;
+            background:
+                linear-gradient(rgba(17, 19, 23, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(17, 19, 23, 0.035) 1px, transparent 1px),
+                var(--paper);
+            background-size: 44px 44px;
+            animation: introExit 0.7s ease 2.55s forwards;
+        }
+
+        .intro-build {
+            width: min(19rem, 58vw);
+            aspect-ratio: 1;
+            position: relative;
+            display: grid;
+            place-items: center;
+            animation: introSettle 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 1.65s both;
+        }
+
+        .intro-build::before,
+        .intro-build::after {
+            content: "";
+            position: absolute;
+            inset: 7%;
+            border: 1px solid color-mix(in srgb, var(--red) 48%, transparent);
+            opacity: 0;
+            transform: scale(0.8) rotate(8deg);
+            animation: introFrame 1.45s ease both;
+        }
+
+        .intro-build::after {
+            inset: 14%;
+            border-color: rgba(17, 19, 23, 0.16);
+            animation-delay: 0.2s;
+            transform: scale(0.76) rotate(-8deg);
+        }
+
+        .intro-logo-piece {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            filter: drop-shadow(0 18px 34px rgba(17, 19, 23, 0.16));
+        }
+
+        .intro-logo-piece.outer {
+            clip-path: polygon(43% 15%, 96% 14%, 74% 83%, 48% 83%, 32% 50%, 37% 37%, 51% 66%, 62% 31%, 48% 31%);
+            transform: translateX(1.4rem) scale(0.94);
+            animation: buildOuter 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) 0.25s forwards;
+        }
+
+        .intro-logo-piece.left {
+            clip-path: polygon(10% 94%, 38% 26%, 58% 26%, 68% 52%, 36% 52%, 24% 83%, 42% 83%, 35% 94%);
+            transform: translateY(1.6rem) scale(0.94);
+            animation: buildLeft 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.72s forwards;
+        }
+
+        .intro-logo-piece.core {
+            clip-path: polygon(38% 22%, 60% 22%, 74% 28%, 81% 43%, 78% 59%, 67% 72%, 35% 72%, 41% 56%, 61% 56%, 68% 49%, 67% 40%, 58% 36%, 46% 36%);
+            transform: translateY(-1.2rem) scale(0.96);
+            animation: buildCore 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) 1.12s forwards;
+        }
+
+        .intro-logo-piece.full {
+            opacity: 0;
+            transform: scale(1.015);
+            animation: buildFull 0.55s ease 1.75s forwards;
+        }
+
+        .intro-wordmark {
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            translate: -50% 0;
+            color: var(--ink);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(0.55rem);
+            animation: introWordmark 0.55s ease 1.85s forwards;
         }
 
         .topbar {
@@ -834,10 +929,118 @@
                 opacity: 1;
                 transform: none;
             }
+
+            body.intro-lock {
+                overflow: auto;
+            }
+
+            .intro-overlay {
+                display: none;
+            }
+        }
+
+        @keyframes buildOuter {
+            0% {
+                opacity: 0;
+                transform: translateX(1.4rem) scale(0.94);
+                clip-path: polygon(58% 15%, 96% 14%, 90% 30%, 73% 30%, 70% 34%, 70% 34%, 70% 34%, 70% 34%, 58% 30%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+                clip-path: polygon(43% 15%, 96% 14%, 74% 83%, 48% 83%, 32% 50%, 37% 37%, 51% 66%, 62% 31%, 48% 31%);
+            }
+        }
+
+        @keyframes buildLeft {
+            0% {
+                opacity: 0;
+                transform: translateY(1.6rem) scale(0.94);
+                clip-path: polygon(18% 94%, 24% 80%, 34% 80%, 34% 94%, 34% 94%, 34% 94%, 34% 94%, 34% 94%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                clip-path: polygon(10% 94%, 38% 26%, 58% 26%, 68% 52%, 36% 52%, 24% 83%, 42% 83%, 35% 94%);
+            }
+        }
+
+        @keyframes buildCore {
+            0% {
+                opacity: 0;
+                transform: translateY(-1.2rem) scale(0.96);
+                clip-path: polygon(42% 25%, 58% 25%, 63% 31%, 62% 39%, 54% 42%, 45% 42%, 43% 38%, 46% 34%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                clip-path: polygon(38% 22%, 60% 22%, 74% 28%, 81% 43%, 78% 59%, 67% 72%, 35% 72%, 41% 56%, 61% 56%, 68% 49%, 67% 40%, 58% 36%, 46% 36%);
+            }
+        }
+
+        @keyframes buildFull {
+            0% {
+                opacity: 0;
+                transform: scale(1.015);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes introFrame {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) rotate(8deg);
+            }
+            55% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.08) rotate(0deg);
+            }
+        }
+
+        @keyframes introSettle {
+            0% {
+                transform: scale(1);
+            }
+            48% {
+                transform: scale(1.035);
+            }
+            100% {
+                transform: scale(0.92);
+            }
+        }
+
+        @keyframes introWordmark {
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes introExit {
+            100% {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+            }
         }
     </style>
 </head>
-<body>
+<body class="intro-lock">
+    <div class="intro-overlay" id="introOverlay" aria-hidden="true">
+        <div class="intro-build">
+            <img class="intro-logo-piece outer" src="img/logo_nobg.svg" alt="" />
+            <img class="intro-logo-piece left" src="img/logo_nobg.svg" alt="" />
+            <img class="intro-logo-piece core" src="img/logo_nobg.svg" alt="" />
+            <img class="intro-logo-piece full" src="img/logo_nobg.svg" alt="" />
+            <div class="intro-wordmark">Project Neura</div>
+        </div>
+    </div>
     <header class="topbar">
         <div class="container">
             <a class="brand" href="#top" aria-label="Project Neura home">
@@ -1023,9 +1226,28 @@
         const postDialog = document.getElementById("postDialog");
         const dialogBody = document.getElementById("dialogBody");
         const closeDialog = document.getElementById("closeDialog");
+        const introOverlay = document.getElementById("introOverlay");
         const formatter = new Intl.DateTimeFormat("en", { month: "short", day: "numeric", year: "numeric" });
 
         const renderMeta = (items) => items.map((item) => `<span>${item}</span>`).join("");
+
+        const finishIntro = () => {
+            document.body.classList.remove("intro-lock");
+            introOverlay?.remove();
+        };
+
+        if (introOverlay) {
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                finishIntro();
+            } else {
+                introOverlay.addEventListener("animationend", (event) => {
+                    if (event.animationName === "introExit") {
+                        finishIntro();
+                    }
+                });
+                window.setTimeout(finishIntro, 3600);
+            }
+        }
 
         const formatDate = (value) => {
             const date = new Date(`${value}T12:00:00`);
